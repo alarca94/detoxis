@@ -5,6 +5,7 @@ import datetime
 
 
 DATA_PATH = './data'
+RESULTS_PATH = './results'
 
 
 def read_processed_data(file):
@@ -14,7 +15,7 @@ def read_processed_data(file):
 
 def read_results(gs_file, preds_file):
     def process_file(file):
-        with open(os.path.join(DATA_PATH, file), 'r', encoding='utf-8') as f:
+        with open(os.path.join(RESULTS_PATH, file), 'r', encoding='utf-8') as f:
             lines = f.readlines()
 
         idxs, results = zip(*[line.rstrip().split('\t') for line in lines])
@@ -24,7 +25,7 @@ def read_results(gs_file, preds_file):
 
 
 def write_results(labels, filename):
-    with open(os.path.join(DATA_PATH, filename), 'w') as f:
+    with open(os.path.join(RESULTS_PATH, filename), 'w') as f:
         for i, label in enumerate(labels):
             last = ((len(labels) - 1) == i)
             f.write(f'{i}\t{label}' + '\n' * (not last))
